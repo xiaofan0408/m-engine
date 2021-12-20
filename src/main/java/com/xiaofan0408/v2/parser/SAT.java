@@ -1,6 +1,5 @@
 package com.xiaofan0408.v2.parser;
 
-import com.xiaofan0408.v2.base.AbstractParserCombinator;
 import com.xiaofan0408.v2.base.ParseResult;
 import com.xiaofan0408.v2.base.Parser;
 import com.xiaofan0408.v2.base.ParserInput;
