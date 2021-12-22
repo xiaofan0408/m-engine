@@ -1,10 +1,11 @@
 package com.xiaofan0408;
 
-import com.xiaofan0408.v2.base.ParseResult;
-import com.xiaofan0408.v2.base.Parser;
-import com.xiaofan0408.v2.base.ParserInput;
+import com.xiaofan0408.v2.base.*;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author zefan.xzf
@@ -13,8 +14,14 @@ import java.util.Optional;
 public class H248Test {
 
     public static void main(String[] args) {
-        Parser<String>  nameParser = H248Parsec.name();
-        Optional<ParseResult<String>> parseResult = nameParser.parse(new ParserInput("U123_"));
+        Parser<Pair<String, String>, Character> nameParser = H248Parsec.name();
+        LinkedList<Character> list = new LinkedList<>();
+        char[] chArr = "U123_".toCharArray();
+        for (char ch : chArr) {
+            list.addLast(ch);
+        }
+
+        Optional<ParseResult<Pair<String,String>>> parseResult = nameParser.parse(new ParserInput<>(list));
         System.out.println(parseResult.isPresent()? parseResult.get().getValue():"");
     }
 
