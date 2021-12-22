@@ -11,12 +11,13 @@ import java.util.Optional;
  * @author zefan.xzf
  * @date 2021/12/18 17:02
  */
-public class Item extends AbstractStringParser {
+public class CharItem extends AbstractParserCombinator<String,Character> {
+
     @Override
-    public Optional<ParseResult<String>> parse(ParserInput input) {
+    public Optional<ParseResult<String>> parse(ParserInput<Character> input) {
         if (!input.empty()) {
-            char ch = input.current();
-            return CommonUtils.makeResult(Character.toString(ch),input.rest());
+            Character ch = input.current();
+            return CommonUtils.makeResult(ch.toString(),input.rest());
         }
         return Optional.empty();
     }

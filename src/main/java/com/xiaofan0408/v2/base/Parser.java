@@ -6,7 +6,7 @@ import java.util.Optional;
  * @author zefan.xzf
  * @date 2021/12/18 16:06
  */
-public interface Parser <T> {
-    Optional<ParseResult<T>> parse(ParserInput input);
+public interface Parser <T,E> {
+    Optional<ParseResult<T>> parse(ParserInput<E> input);
 }
 

@@ -22,4 +22,12 @@ public class Pair<T,U> {
     public U getU1() {
         return u1;
     }
+
+    @Override
+    public String toString() {
+        return "Pair{" +
+                "t1=" + t1 +
+                ", u1=" + u1 +
+                '}';
+    }
 }

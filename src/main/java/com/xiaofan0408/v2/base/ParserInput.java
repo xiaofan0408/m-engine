@@ -1,42 +1,45 @@
 package com.xiaofan0408.v2.base;
 
+import java.util.LinkedList;
+
 /**
  * @author zefan.xzf
  * @date 2021/12/18 16:07
  */
-public class ParserInput {
-    private final String source;
+public class ParserInput<E> {
+    private final LinkedList<E> source;
     private final Position position;
     static class Position {
         int index;
     }
-    public ParserInput(String source) {
+    public ParserInput(LinkedList<E> source) {
         this.source = source;
         this.position = new Position();
     }
 
-    public ParserInput(String source, Position position) {
+    public ParserInput(LinkedList<E> source, Position position) {
         this.source = source;
         this.position = position;
     }
 
-    public char current() {
-        return source.charAt(position.index);
+    public boolean empty() {
+        return source.isEmpty();
     }
 
-    public boolean empty(){
-        return source.length() == position.index;
+    public E current() {
+        return source.peek();
     }
 
     public void advance() {
-        advance(1);
+//        advance(1);
+        source.removeFirst();
     }
 
     public void advance(int n) {
-        position.index += n;
+//        position.index += n;
     }
 
-    public ParserInput rest() {
-        return new ParserInput(source,position);
+    public ParserInput<E> rest() {
+        return new ParserInput<>(source,position);
     }
 }
