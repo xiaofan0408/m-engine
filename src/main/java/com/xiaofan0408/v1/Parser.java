@@ -1,8 +1,10 @@
 package com.xiaofan0408.v1;
 
 import com.xiaofan0408.v1.impl.BinaryExprAst;
+import com.xiaofan0408.v1.impl.FuncExprAst;
 import com.xiaofan0408.v1.impl.NumberExprAst;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -110,9 +112,34 @@ public class Parser {
                     return parseNumber();
                 }
             }
+            case Variable: {
+                if (BuildInFuncContext.buildInFunc.containsKey(currTok.getTok())) {
+                    return parseFunction(currTok.getTok());
+                } else {
+                    error.append(String.format("unkown variable: %s, pos[%d]", currTok.getTok(),currTok.getOffset()));
+                }
+            }
             default:{
                 return null;
             }
         }
+    }
+
+    private ExprAst parseFunction(String token) {
+        getNextToken();
+       List<ExprAst> argList = new ArrayList<>();
+        if (currTok.getTok().equals("(")) {
+            while (getNextToken() != null){
+                if (currTok.getTok().equals(")")) {
+                    break;
+                }
+                if (currTok.getTok().equals(",")) {
+                    continue;
+                }
+                ExprAst e = parseExpression();
+                argList.add(e);
+            }
+        }
+        return new FuncExprAst(token,argList);
     }
 }

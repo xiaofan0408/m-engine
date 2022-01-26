@@ -7,7 +7,8 @@ package com.xiaofan0408.v1;
 public enum  TokenType {
 
     Literal,
-    Operator
+    Operator,
+    Variable
     ;
 
 }

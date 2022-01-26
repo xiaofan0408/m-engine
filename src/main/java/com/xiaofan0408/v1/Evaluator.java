@@ -1,7 +1,12 @@
 package com.xiaofan0408.v1;
 
 import com.xiaofan0408.v1.impl.BinaryExprAst;
+import com.xiaofan0408.v1.impl.FuncExprAst;
 import com.xiaofan0408.v1.impl.NumberExprAst;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 /**
  * @author zefan.xzf
@@ -45,6 +50,15 @@ public class Evaluator {
             }
             case NumberExprAst.TYPE:{
                 return ((NumberExprAst)expr).getVal();
+            }
+            case FuncExprAst.TYPE: {
+                FuncExprAst funcExprAst = (FuncExprAst)expr;
+                Function<List<Double>,Double> function = BuildInFuncContext.buildInFunc.get(funcExprAst.getFuncName());
+                List<Double> doubles = new ArrayList<>();
+                for (ExprAst e:funcExprAst.getExprAstList()) {
+                    doubles.add(eval(e));
+                }
+                return function.apply(doubles);
             }
             default:{
                 return 0.0;

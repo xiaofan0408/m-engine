@@ -1,7 +1,7 @@
 package com.xiaofan0408.v1;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
 
 /**
  * @author zefan.xzf
@@ -22,6 +22,7 @@ public class TokenConstant {
         op.add('/') ;
         op.add('^') ;
         op.add('%') ;
+        op.add(',') ;
 
         literal.add('0');
         literal.add('1');

@@ -50,7 +50,7 @@ public class Lexer {
             return null;
         }
         while (isWhitespace(ch) && error.length() == 0) {
-
+            nextCh();
         }
         int start = offset;
         Token token = null;
@@ -69,7 +69,14 @@ public class Lexer {
             token.setTok(source.substring(start,offset).replaceAll("_",""));
             token.setType(TokenType.Literal);
             token.setOffset(start);
-        } else {
+        } else if (isLetter(ch)) {
+            while (isLetter(ch) && nextCh()){}
+            String var = source.substring(start,offset);
+            token = new Token();
+            token.setTok(var);
+            token.setType(TokenType.Variable);
+            token.setOffset(start);
+        }  else {
             if (ch != ' ') {
                 error.append(String.format("symbol error: unkown '%s', pos [%d:]\n",ch,start));
             }
@@ -97,6 +104,10 @@ public class Lexer {
 
     private boolean isDigitNum(char c) {
         return '0' <= c && c <= '9' || c == '.' || c == '_' || c == 'e';
+    }
+
+    private boolean isLetter(char c) {
+        return Character.isLetter(c);
     }
 
     public List<Token> getTokens() {
