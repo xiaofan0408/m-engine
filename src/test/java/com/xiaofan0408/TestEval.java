@@ -26,7 +26,7 @@ public class TestEval {
 
     @Test
     public void testFn2() throws Exception {
-        Lexer lexer = new Lexer("111 + pow(2,20)");
+        Lexer lexer = new Lexer("111 + 2^20");
         System.out.println(lexer.getTokens());
         Parser parser = new Parser(lexer.getTokens(), lexer.getSource());
         ExprAst exprAst = parser.parseExpression();

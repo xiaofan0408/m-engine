@@ -44,7 +44,9 @@ public class Evaluator {
                     case "%":{
                         return l % r;
                     }
-
+                    case "^":{
+                        return Math.pow(l,r);
+                    }
                     default:{}
                 }
             }
